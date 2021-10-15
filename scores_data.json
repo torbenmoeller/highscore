@@ -1,0 +1,50 @@
+[
+    {
+        "userID": "user1",
+        "datetime": "2021-10-02T10:00:00Z",
+        "season": "0",
+        "score": "100"
+    },
+    {
+        "userID": "user1",
+        "datetime": "2021-10-03T10:00:00Z",
+        "season": "0",
+        "score": "200"
+    },
+    {
+        "userID": "user1",
+        "datetime": "2021-10-03T11:00:00Z",
+        "season": "0",
+        "score": "300"
+    },
+    {
+        "userID": "user1",
+        "datetime": "2021-10-03T12:00:00Z",
+        "season": "0",
+        "score": "400"
+    },
+    {
+        "userID": "user2",
+        "datetime": "2021-10-02T10:00:00Z",
+        "season": "0",
+        "score": "500"
+    },
+    {
+        "userID": "user2",
+        "datetime": "2021-10-02T10:00:00Z",
+        "season": "0",
+        "score": "100"
+    },
+    {
+        "userID": "user3",
+        "datetime": "2021-10-02T10:00:00Z",
+        "season": "0",
+        "score": "600"
+    },
+    {
+        "userID": "user3",
+        "datetime": "2021-10-02T10:00:00Z",
+        "season": "0",
+        "score": "605"
+    }
+]
