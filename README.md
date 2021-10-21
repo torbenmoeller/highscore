@@ -1,20 +1,28 @@
 # Highscore
 
 # Features
-Python
-FastApi
-DynamoDb
-Local development with Docker Compose
-Deployment on Kubernetes
-Tests with Postman
-Dependabot
+* Stores score of users
+* Shows highest scores of a user
+* Shows highest overall scores
+* Shows all scores
+
+# Used technologies
+* Python
+* FastApi
+* DynamoDb
+* Local development with Docker Compose
+* Deployment on Kubernetes
+* Tests with Postman
+* Dependabot
 
 # Installation
 pip install -r requirements.txt
+
 docker build --tag highscore:latest .
 
 # Quickstart
 docker compose up -d --build
+
 docker compose down
 
 # Kubernetes
