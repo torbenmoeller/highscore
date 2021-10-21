@@ -3,13 +3,28 @@ from time import sleep
 import boto3
 from boto3.dynamodb.conditions import Key
 
-from dynamodb_admin import create_score_table
+from .dynamodb_admin import create_score_table
 
-client = boto3.client('dynamodb', endpoint_url="http://localhost:8000")
-dynamodb = boto3.resource('dynamodb', endpoint_url="http://localhost:8000")
+aws_access_key_id = 'FAKE_ACCESS_KEY'
+aws_secret_access_key = 'FAKE_SECRET_KEY'
+region_name = 'eu-central-1'
+# endpoint_url = "http://localhost:8000"
+endpoint_url = "http://dynamodb-local:8000"
+client = boto3.client(
+    'dynamodb',
+    aws_access_key_id=aws_access_key_id,
+    aws_secret_access_key=aws_secret_access_key,
+    region_name=region_name,
+    endpoint_url=endpoint_url)
+dynamodb = boto3.resource(
+    'dynamodb',
+    aws_access_key_id=aws_access_key_id,
+    aws_secret_access_key=aws_secret_access_key,
+    region_name=region_name,
+    endpoint_url=endpoint_url)
 existing_tables = client.list_tables()['TableNames']
 if 'Scores' not in existing_tables:
-    create_score_table()
+    create_score_table(dynamodb)
 
 table = dynamodb.Table('Scores')
 
