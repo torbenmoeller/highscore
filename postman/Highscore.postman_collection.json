@@ -1,0 +1,229 @@
+{
+	"info": {
+		"_postman_id": "79d46091-02a0-4970-9e21-ddae8d404a9e",
+		"name": "Highscore",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Api Upsert Score",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    pm.expect(pm.response.json().ResponseMetadata.HTTPStatusCode).to.eql(200)\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/scores/:username?score=100",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"scores",
+						":username"
+					],
+					"query": [
+						{
+							"key": "score",
+							"value": "100",
+							"description": "(Required) "
+						}
+					],
+					"variable": [
+						{
+							"key": "username",
+							"value": "user1",
+							"description": "(Required) "
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Api Upsert Score",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    pm.expect(pm.response.json().ResponseMetadata.HTTPStatusCode).to.eql(200)\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/scores/:username?score=200",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"scores",
+						":username"
+					],
+					"query": [
+						{
+							"key": "score",
+							"value": "200",
+							"description": "(Required) "
+						}
+					],
+					"variable": [
+						{
+							"key": "username",
+							"value": "user1",
+							"description": "(Required) "
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Api Upsert Score",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    pm.expect(pm.response.json().ResponseMetadata.HTTPStatusCode).to.eql(200)\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/scores/:username?score=300",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"scores",
+						":username"
+					],
+					"query": [
+						{
+							"key": "score",
+							"value": "300",
+							"description": "(Required) "
+						}
+					],
+					"variable": [
+						{
+							"key": "username",
+							"value": "user2",
+							"description": "(Required) "
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Api Get Score",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Score is valid\", function () {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    pm.expect(parseInt(responseJson[\"0\"].score)).to.gt(0)\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/scores/:username",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"scores",
+						":username"
+					],
+					"variable": [
+						{
+							"key": "username",
+							"value": "user1",
+							"description": "(Required) "
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Api Highscores",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Score is valid\", function () {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    pm.expect(parseInt(responseJson[\"0\"].score)).to.gt(0)\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/highscores?limit=3",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"highscores"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
