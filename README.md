@@ -32,12 +32,14 @@ kubectl apply -f k8s-deployment.yml -n highscore
 * Scores are sorted lexically
 
 # ToDo
-* Automate build with Github Actions
+* Configuration
+* Automate build with GitHub Actions
 * Publish container
 * Setup AWS environment with terraform
 * Deploy to EKS
 * Unit tests
-* Run Postman in Github Action with Newman
+* Run Postman in GitHub Action with Newman
+* Fill generated OpenApi with description and default values
 * Authentication
 * Fill this ReadMe
 * Opensource Licenses
@@ -45,6 +47,9 @@ kubectl apply -f k8s-deployment.yml -n highscore
 
 * Snyk scan for container security
 * Python code scan with Sonar
+* Integrate GitHub code scanning
+* Add GitHub security policy
+* Integrate with Github Releases
 
 * Maybe monitoring
 * Maybe observability
