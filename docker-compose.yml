@@ -9,3 +9,14 @@ services:
     volumes:
       - "./docker/dynamodb:/home/dynamodblocal/data"
     working_dir: /home/dynamodblocal
+    networks:
+      - highscore-network
+  highscore:
+    build: .
+    image: torben/highscore:latest
+    ports:
+      - "5000:5000"
+    networks:
+      - highscore-network
+networks:
+  highscore-network:
