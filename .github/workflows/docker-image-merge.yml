@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: Docker Image Main
 on:
   push:
     branches: [ main ]
@@ -7,12 +7,17 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    env:
+      IMAGE_NAME: torben/highscore
+      IMAGE_ID: $IMAGE_NAME:${{ github.run_number }}-${{ github.run_attempt }}
+      IMAGE_ID_LATEST: $IMAGE_NAME:latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v2
 
       - name: Build the Docker image
-        run: docker build . --file Dockerfile --tag torben/highscore:${{ github.run_number }}-${{ github.run_attempt }}
+        run: docker build . --file Dockerfile --tag $IMAGE_ID
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v1.10.0
@@ -21,10 +26,10 @@ jobs:
           password: ${{ secrets.DOCKER_HUB_TOKEN }}
 
       - name: Push image
-        run: docker push torben/highscore:${{ github.run_number }}-${{ github.run_attempt }}
+        run: docker push $IMAGE_ID
 
       - name: Tag latest image
-        run: docker tag torben/highscore:latest
+        run: docker tag $IMAGE_ID $IMAGE_ID_LATEST
 
       - name: Push latest image
-        run: docker push torben/highscore:latest
+        run: docker push $IMAGE_ID_LATEST
