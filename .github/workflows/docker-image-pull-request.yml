@@ -1,16 +1,19 @@
 name: Docker Image CI
 on: pull_request
 
+env:
+  IMAGE_NAME: torben/highscore
+  IMAGE_ID: $IMAGE_NAME:${{ github.run_number }}-${{ github.run_attempt }}
+
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout
         uses: actions/checkout@v2
 
       - name: Build the Docker image
-        run: docker build . --file Dockerfile --tag torben/highscore:${{ github.run_number }}-${{ github.run_attempt }}
+        run: docker build . --file Dockerfile --tag $IMAGE_ID
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v1.10.0
@@ -19,4 +22,4 @@ jobs:
           password: ${{ secrets.DOCKER_HUB_TOKEN }}
 
       - name: Push image
-        run: docker push torben/highscore:${{ github.run_number }}-${{ github.run_attempt }}
+        run: docker push $IMAGE_ID
