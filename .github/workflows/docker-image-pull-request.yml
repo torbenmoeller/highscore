@@ -7,9 +7,7 @@ jobs:
     steps:
       - name: Set environment variables
         run: |
-          echo 'torben/highscore' >> ${IMAGE_NAME}
-          echo "$IMAGE_NAME:${{ github.run_number }}-${{ github.run_attempt }}" >> IMAGE_ID
-          echo "$IMAGE_NAME:latest" >> IMAGE_ID_LATEST
+          echo 'torben/highscore' >> "${IMAGE_NAME}"
 
       - name: Checkout
         uses: actions/checkout@v2
