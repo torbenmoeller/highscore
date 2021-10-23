@@ -7,15 +7,15 @@ jobs:
     steps:
       - name: Set environment variables
         run: |
-          echo 'IMAGE_NAME=torben/highscore' >> $GITHUB_ENV
-          echo "IMAGE_ID=${{ env.IMAGE_NAME}}:${{ github.run_number }}-${{ github.run_attempt }}" >> $GITHUB_ENV
-          echo "IMAGE_ID_LATEST=${{ env.IMAGE_NAME}}:latest" >> $GITHUB_ENV
+          echo "IMAGE_NAME=torben/highscore" >> $GITHUB_ENV
+          echo "IMAGE_ID=${{ env.IMAGE_NAME }}:${{ github.run_number }}-${{ github.run_attempt }}" >> $GITHUB_ENV
+          echo "IMAGE_ID_LATEST=${{ env.IMAGE_NAME }}:latest" >> $GITHUB_ENV
 
       - name: Checkout
         uses: actions/checkout@v2
 
       - name: Build the Docker image
-        run: docker build . --file Dockerfile --tag ${{ env.IMAGE_ID}}
+        run: docker build . --file Dockerfile --tag ${{ env.IMAGE_ID }}
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v1.10.0
@@ -24,4 +24,4 @@ jobs:
           password: ${{ secrets.DOCKER_HUB_TOKEN }}
 
       - name: Push image
-        run: docker push ${{ env.IMAGE_ID}}
+        run: docker push ${{ env.IMAGE_ID }}
