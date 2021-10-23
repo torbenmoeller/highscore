@@ -3,16 +3,21 @@ on:
   push:
     branches: [ main ]
 
+env:
+  IMAGE_NAME: torben/highscore
+  IMAGE_ID: $IMAGE_NAME:${{ github.run_number }}-${{ github.run_attempt }}
+  IMAGE_ID_LATEST: $IMAGE_NAME:latest
+  
 jobs:
   build:
     runs-on: ubuntu-latest
-
-    env:
-      IMAGE_NAME: torben/highscore
-      IMAGE_ID: $IMAGE_NAME:${{ github.run_number }}-${{ github.run_attempt }}
-      IMAGE_ID_LATEST: $IMAGE_NAME:latest
-
     steps:
+
+      - env:
+          IMAGE_NAME: torben/highscore
+          IMAGE_ID: $IMAGE_NAME:${{ github.run_number }}-${{ github.run_attempt }}
+          IMAGE_ID_LATEST: $IMAGE_NAME:latest
+
       - name: Checkout
         uses: actions/checkout@v2
 
