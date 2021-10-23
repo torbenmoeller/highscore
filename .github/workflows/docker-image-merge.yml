@@ -3,15 +3,17 @@ on:
   push:
     branches: [ main ]
 
+env:
+  IMAGE_NAME: torben/highscore
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Set environment variables
         run: |
-          echo 'IMAGE_NAME="torben/highscore"' >> $GITHUB_ENV
-          echo "IMAGE_ID=${{ env.IMAGE_NAME }}:${{ github.run_number }}-${{ github.run_attempt }}" >> $GITHUB_ENV
-          echo "IMAGE_ID_LATEST=${{ env.IMAGE_NAME }}:latest" >> $GITHUB_ENV
+          echo "IMAGE_ID=$IMAGE_NAME:${{ github.run_number }}-${{ github.run_attempt }}" >> $GITHUB_ENV
+          echo "IMAGE_ID_LATEST=$IMAGE_NAME:latest" >> $GITHUB_ENV
 
       - name: Checkout
         uses: actions/checkout@v2
