@@ -7,7 +7,7 @@ jobs:
     steps:
       - name: Set environment variables
         run: |
-          echo 'torben/highscore' >> "${IMAGE_NAME}"
+          echo 'torben/highscore' >> $IMAGE_NAME
 
       - name: Checkout
         uses: actions/checkout@v2
