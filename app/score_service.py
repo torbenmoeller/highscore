@@ -3,7 +3,7 @@ from time import sleep
 import boto3
 from boto3.dynamodb.conditions import Key
 
-from .dynamodb_admin import create_score_table
+from dynamodb_admin import create_score_table
 
 aws_access_key_id = 'FAKE_ACCESS_KEY'
 aws_secret_access_key = 'FAKE_SECRET_KEY'
