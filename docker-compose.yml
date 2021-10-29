@@ -13,7 +13,7 @@ services:
       - highscore-network
   highscore:
     build: .
-    image: torben/highscore:latest
+    container_name: highscore
     ports:
       - "5000:5000"
     networks:

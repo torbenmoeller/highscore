@@ -3,7 +3,7 @@ from datetime import datetime
 import uvicorn
 from fastapi import FastAPI
 
-from .score_service import get_highscores_for_current_season, upsert_score, query_score_for_user, \
+from score_service import get_highscores_for_current_season, upsert_score, query_score_for_user, \
     get_all_scores
 
 app = FastAPI()
