@@ -4,13 +4,15 @@ from random import randrange, seed
 import boto3
 from starlette.testclient import TestClient
 
-from dynamodb_admin import create_score_table, delete_score_table, load_scores
-from main import app
+from app.dynamodb_admin import create_score_table, delete_score_table, load_scores
 
-dynamodb_client = boto3.client('dynamodb', endpoint_url="http://localhost:8000")
-dynamodb = boto3.resource('dynamodb', endpoint_url="http://localhost:8000")
+from app.main import app
+
+dynamodb_client = boto3.client('dynamodb', endpoint_url="http://127.0.0.1:8000")
+dynamodb = boto3.resource('dynamodb', endpoint_url="http://127.0.0.1:8000")
 client = TestClient(app)
 base_url = "http://127.0.0.1:5000"
+# base_url = "http://192.168.178.13:32144"
 scores_path = "/scores"
 highscores_path = "/highscores"
 limit = "?limit=5"
