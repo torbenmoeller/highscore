@@ -1,15 +1,24 @@
 from time import sleep
 
 import boto3
+import yaml
 from boto3.dynamodb.conditions import Key
 
 from dynamodb_admin import create_score_table
 
-aws_access_key_id = 'FAKE_ACCESS_KEY'
-aws_secret_access_key = 'FAKE_SECRET_KEY'
-region_name = 'eu-central-1'
-# endpoint_url = "http://localhost:8000"
-endpoint_url = "http://dynamodb-local:8000"
+with open("configuration.yaml", "r") as stream:
+    try:
+        config = yaml.safe_load(stream)
+    except yaml.YAMLError as ex:
+        print(ex)
+        raise ex
+aws_access_key_id = config['aws']['access_key_id']
+aws_secret_access_key = config['aws']['secret_access_key']
+region_name = config['aws']['region_name']
+endpoint_url = config['aws']['dynamodb']['endpoint_url']
+
+table_name: str = config['highscore']['table_name']
+
 client = boto3.client(
     'dynamodb',
     aws_access_key_id=aws_access_key_id,
@@ -23,10 +32,10 @@ dynamodb = boto3.resource(
     region_name=region_name,
     endpoint_url=endpoint_url)
 existing_tables = client.list_tables()['TableNames']
-if 'Scores' not in existing_tables:
+if table_name not in existing_tables:
     create_score_table(dynamodb)
 
-table = dynamodb.Table('Scores')
+table = dynamodb.Table(table_name)
 
 
 # When adding a global secondary index to an existing table, you cannot query the index until it has been backfilled.
