@@ -1,3 +1,4 @@
+import os
 from time import sleep
 
 import boto3
@@ -12,8 +13,8 @@ with open("conf/configuration.yaml", "r") as stream:
     except yaml.YAMLError as ex:
         print(ex)
         raise ex
-aws_access_key_id = config['aws']['access_key_id']
-aws_secret_access_key = config['aws']['secret_access_key']
+aws_access_key_id = os.getenv('aws_access_key_id', 'FAKE_ACCESS_KEY')
+aws_secret_access_key = os.getenv('aws_secret_access_key', 'FAKE_SECRET_KEY')
 region_name = config['aws']['region_name']
 endpoint_url = config['aws']['dynamodb']['endpoint_url']
 
