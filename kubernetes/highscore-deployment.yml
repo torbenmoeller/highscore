@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: highscore
+  labels:
+    run: highscore
+    layer: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: highscore
+      layer: backend
+  template:
+    metadata:
+      labels:
+        run: highscore
+        layer: backend
+    spec:
+      containers:
+      - name: highscore
+        image: torben/highscore:latest
+        ports:
+        - containerPort: 5000
+        envFrom:
+          - secretRef:
+              name: highscore-aws-secrets
+        volumeMounts:
+          - name: highscore-config-volume
+            mountPath: "/app/conf"
+            readOnly: true
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 5000
+          initialDelaySeconds: 3
+          periodSeconds: 3
+      volumes:
+        - name: highscore-config-volume
+          configMap:
+            name: highscore-config
