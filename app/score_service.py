@@ -83,8 +83,9 @@ def get_all_scores():
 
 
 def table_exists():
-    # try:
-    #     dynamodb.describe_table(TableName=table_name)
-    # except dynamodb.exceptions.ResourceNotFoundException:
-    #     return False
+    try:
+        client.describe_table(TableName=table_name)
+    except client.exceptions.ResourceNotFoundException as ex:
+        print(ex)
+        return False
     return True
