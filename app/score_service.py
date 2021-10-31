@@ -6,7 +6,7 @@ from boto3.dynamodb.conditions import Key
 
 from dynamodb_admin import create_score_table
 
-with open("configuration.yaml", "r") as stream:
+with open("conf/configuration.yaml", "r") as stream:
     try:
         config = yaml.safe_load(stream)
     except yaml.YAMLError as ex:
