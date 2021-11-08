@@ -3,26 +3,26 @@ from time import sleep
 import boto3
 from boto3.dynamodb.conditions import Key
 
-from config import config, aws_access_key_id, aws_secret_access_key, region_name, endpoint_url, table_name
+from config import config
 from dynamodb_admin import create_score_table
 
 client = boto3.client(
     'dynamodb',
-    aws_access_key_id=aws_access_key_id,
-    aws_secret_access_key=aws_secret_access_key,
-    region_name=region_name,
-    endpoint_url=endpoint_url)
+    aws_access_key_id=config.aws_access_key_id,
+    aws_secret_access_key=config.aws_secret_access_key,
+    region_name=config.region_name,
+    endpoint_url=config.endpoint_url)
 dynamodb = boto3.resource(
     'dynamodb',
-    aws_access_key_id=aws_access_key_id,
-    aws_secret_access_key=aws_secret_access_key,
-    region_name=region_name,
-    endpoint_url=endpoint_url)
+    aws_access_key_id=config.aws_access_key_id,
+    aws_secret_access_key=config.aws_secret_access_key,
+    region_name=config.region_name,
+    endpoint_url=config.endpoint_url)
 existing_tables = client.list_tables()['TableNames']
-if table_name not in existing_tables:
+if config.table_name not in existing_tables:
     create_score_table(dynamodb)
 
-table = dynamodb.Table(table_name)
+table = dynamodb.Table(config.table_name)
 
 
 # When adding a global secondary index to an existing table, you cannot query the index until it has been backfilled.
@@ -84,7 +84,7 @@ def get_all_scores():
 
 def table_exists():
     try:
-        client.describe_table(TableName=table_name)
+        client.describe_table(TableName=config.table_name)
     except client.exceptions.ResourceNotFoundException as ex:
         print(ex)
         return False

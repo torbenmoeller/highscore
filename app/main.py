@@ -3,7 +3,7 @@ from datetime import datetime
 import uvicorn
 from fastapi import FastAPI, HTTPException
 
-from config import config, aws_access_key_id, endpoint_url, table_name, region_name, aws_secret_access_key
+from config import config
 from score_service import get_highscores_for_current_season, upsert_score, query_score_for_user, \
     get_all_scores, table_exists
 
@@ -34,20 +34,20 @@ def api_highscores(limit: int = 3):
 
 @app.get("/health")
 def api_health():
-    if aws_access_key_id is None:
+    if config.aws_access_key_id is None:
         raise HTTPException(status_code=500, detail="AWS Access Key not set")
-    if aws_secret_access_key is None:
+    if config.aws_secret_access_key is None:
         raise HTTPException(status_code=500, detail="AWS Secret Key not set")
     if config is None:
         raise HTTPException(status_code=500, detail="Config file not found")
     if not table_exists():
         raise HTTPException(status_code=500, detail="Error while describing table")
     result = {
-        'aws_access_key_id': aws_access_key_id,
+        'aws_access_key_id': config.aws_access_key_id,
         'aws_secret_access_key': '***',
-        'region_name': region_name,
-        'endpoint_url': endpoint_url,
-        'table_name': table_name
+        'region_name': config.region_name,
+        'endpoint_url': config.endpoint_url,
+        'table_name': config.table_name
     }
     return result
 
