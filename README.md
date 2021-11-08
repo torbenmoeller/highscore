@@ -1,4 +1,4 @@
-#Highscore
+# Highscore
 
 <!-- TABLE OF CONTENTS -->
 <details>
