@@ -16,7 +16,7 @@ class Config:
 # read conf/configuration.yaml
 with open("conf/configuration.yaml", "r") as stream:
     try:
-        config = yaml.safe_load(stream)
+        configuration_yaml = yaml.safe_load(stream)
     except yaml.YAMLError as ex:
         print(ex)
         raise ex
@@ -27,7 +27,7 @@ config = Config(
     aws_secret_access_key=os.getenv('aws_secret_access_key', 'FAKE_SECRET_KEY'),
 
     # read configuration parameters
-    region_name=config['aws']['region_name'],
-    endpoint_url=config['aws']['dynamodb']['endpoint_url'],
-    table_name=config['highscore']['table_name']
+    region_name=configuration_yaml['aws']['region_name'],
+    endpoint_url=configuration_yaml['aws']['dynamodb']['endpoint_url'],
+    table_name=configuration_yaml['highscore']['table_name'],
 )
