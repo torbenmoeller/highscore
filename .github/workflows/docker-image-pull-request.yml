@@ -21,7 +21,7 @@ jobs:
         run: docker build . -f Dockerfile -t ${{ env.IMAGE_ID }}
 
       - name: Log in to Docker Hub
-        uses: docker/login-action@v1.10.0
+        uses: docker/login-action@v1.12.0
         with:
           username: torben
           password: ${{ secrets.DOCKER_HUB_TOKEN }}
